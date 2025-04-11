@@ -1,4 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+
 import './HomePage.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -12,6 +16,9 @@ function HomePage() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [showCartConfirmation, setShowCartConfirmation] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
+    
+    // Ref สำหรับ popular scroll
+    const popularScrollRef = useRef(null);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -40,6 +47,8 @@ function HomePage() {
         setShowCartConfirmation(false);
     };
 
+
+    
     return (
         <div className="homepage-container">
             <Navbar />
@@ -47,23 +56,11 @@ function HomePage() {
             {/* Promo Banner */}
             <div className="promo-banner">
                 <div className="custom-slider">
-                    <button 
-                        className="slider-btn left" 
-                        onClick={goToPrev} 
-                        aria-label="Previous banner">
-                        &#8249;
-                    </button>
                     <img
                         src={bannerImages[currentIndex]}
                         alt={`โปรโมชั่น ${currentIndex + 1}`}
                         className="promo-image"
                     />
-                    <button 
-                        className="slider-btn right" 
-                        onClick={goToNext} 
-                        aria-label="Next banner">
-                        &#8250;
-                    </button>
                 </div>
                 <div className="slider-dots">
                     {bannerImages.map((_, i) => (
@@ -78,53 +75,46 @@ function HomePage() {
 
             {/* Main Menu */}
             <div className="main-menu">
-                <button className="menu-button">
+                <Link to="/installation" className="menu-button">
                     <img src="/assets/ruler.png" alt="บริการติดตั้ง" className="menu-icon" />
                     บริการติดตั้ง
-                </button>
-                <button className="menu-button">
+                </Link>
+                <Link to="/repair" className="menu-button">
                     <img src="/assets/wrench.png" alt="บริการซ่อมแซม" className="menu-icon" />
                     บริการซ่อมแซม
-                </button>
+                </Link>
             </div>
-
-            {/* Popular Services */}
+            
             <section className="popular-section">
-                <h3>บริการยอดนิยม</h3>
-                <div className="popular-scroll">
-                    {[
-                        { title: "ติดตั้งเครื่องใช้ไฟฟ้า", imgSrc: "/assets/electric-appliance.jpg" },
-                        { title: "ติดตั้งระบบไฟฟ้า", imgSrc: "/assets/electrical-system.jpg" },
-                        { title: "ติดตั้งระบบประปา", imgSrc: "/assets/water-system.jpg" },
-                        { title: "ติดตั้งเฟอร์นิเจอร์", imgSrc: "/assets/furniture.jpg" },
-                    ].map((item, i) => (
-                        <div key={i} className="popular-item">
-                            <div className="img-box">
-                                <img src={item.imgSrc} alt={item.title} />
-                            </div>
-                            <p>{item.title}</p>
-                            <button className="popular-button">ดูรายละเอียด</button>
-                            <button 
-                                className="add-to-cart-button" 
-                                onClick={() => handleAddToCart(item)}>
-                                ใส่ตะกร้า
-                            </button>
-                        </div>
-                    ))}
+    <h3>บริการยอดนิยม</h3>
+    <div className="popular-scroll" ref={popularScrollRef}>
+        {[
+            { title: "ติดตั้งเครื่องใช้ไฟฟ้า", imgSrc: "/assets/air conditioner.jpg", price: "500 บาท" },
+            { title: "ซ่อมระบบไฟฟ้า", imgSrc: "/assets/electrical-system.jpg", price: "600 บาท" },
+            { title: "ซ่อมระบบประปา", imgSrc: "/assets/water-system.jpg", price: "550 บาท" },
+            { title: "ติดตั้งปั้มนํ้า", imgSrc: "/assets/water pump.jpg", price: "700 บาท" },
+        ].map((item, i) => (
+            <div key={i} className="popular-item">
+                <div className="img-box">
+                    <img src={item.imgSrc} alt={item.title} />
                 </div>
-            </section>
+                <p>{item.title}</p>
+                <p className="service-price">{item.price}</p> {/* แสดงราคาแทนปุ่ม */}
+            </div>
+        ))}
+    </div>
+</section>
 
-            {/* Categories */}
             <section className="category-section">
                 <h3>หมวดสินค้า</h3>
                 <div className="category-scroll">
                     {[
-                        { title: "เครื่องใช้ไฟฟ้า", imgSrc: "/assets/electric-appliance.jpg" },
-                        { title: "ประปา", imgSrc: "/assets/category2.png" },
-                        { title: "ไฟฟ้า", imgSrc: "/assets/category3.png" },
-                        { title: "เครื่องมือวัด", imgSrc: "/assets/category4.png" },
-                        { title: "เฟอร์นิเจอร์", imgSrc: "/assets/category5.png" },
-                        { title: "งานช่างทั่วไป", imgSrc: "/assets/category6.png" }
+                        { title: "ติดตั้งเครื่องปรับอากาศ", imgSrc: "/assets/air conditioner.jpg" },
+                        { title: "ติดตั้งปั้มนํ้า", imgSrc: "/assets/water pump.jpg" },
+                        { title: "ซ่อมระบบไฟฟ้า", imgSrc: "/assets/electrical-system.jpg" },
+                        { title: "ซ่อมระบบประปา", imgSrc: "/assets/water-system.jpg" }
+                       
+                        
                     ].map((item, i) => (
                         <div key={i} className="category-item">
                             <div className="img-box">
@@ -132,10 +122,12 @@ function HomePage() {
                             </div>
                             <p>{item.title}</p>
                             <button className="category-button">ดูรายละเอียด</button>
-                            <button 
-                                className="add-to-cart-button" 
+                            <button
+                                className="add-to-cart-button"
                                 onClick={() => handleAddToCart(item)}>
-                                ใส่ตะกร้า
+                                <span>
+                                    <FontAwesomeIcon icon={faShoppingCart} size="lg" /> ใส่รถเข็น
+                                </span>
                             </button>
                         </div>
                     ))}
@@ -145,18 +137,50 @@ function HomePage() {
             {/* Cart Confirmation */}
             {showCartConfirmation && (
                 <div className="cart-confirmation">
-                    <p>คุณต้องการเพิ่มบริการหรือสินค้านี้ "{selectedItem.title}" ลงในตะกร้าหรือไม่?</p>
-                    <button onClick={confirmAddToCart}>ใช่</button>
-                    <button onClick={() => setShowCartConfirmation(false)}>ไม่</button>
+                    <div className="confirmation-box">
+                        <p>
+                            คุณต้องการเพิ่มบริการหรือรถเข็น<br />
+                            "<strong>{selectedItem.title}</strong>" ลงในตะกร้าหรือไม่?
+                        </p>
+                        <div className="button-group">
+                            <button className="btn yes" onClick={confirmAddToCart}>ใช่</button>
+                            <button className="btn no" onClick={() => setShowCartConfirmation(false)}>ไม่</button>
+                        </div>
+                    </div>
                 </div>
             )}
 
             {/* FAQ Section */}
-            <section className="faq-section">
-                <h3>คำถามที่พบบ่อย</h3>
-                <div className="faq-box">รวมคำถามและคำตอบที่พบบ่อย</div>
-            </section>
+<section className="faq-section">
+  <h3>คำถามที่พบบ่อย</h3>
+  <div className="faq-box">รวมคำถามและคำตอบที่พบบ่อย</div>
+</section>
 
+            <section className="service-steps-section">
+    <h3>ขั้นตอนการใช้บริการ</h3>
+    <div className="steps-container">
+        <div className="step-item">
+            <span className="step-number">1</span>
+            <p>เลือกบริการที่ต้องการ</p>
+        </div>
+        <div className="step-item">
+            <span className="step-number">2</span>
+            <p>จองการติดตั้งหรือซ่อมแซมและเพิ่มลงในตะกร้า</p>
+        </div>
+        <div className="step-item">
+            <span className="step-number">3</span>
+            <p>รอการยืนยันจากทีมงาน</p>
+        </div>
+        <div className="step-item">
+            <span className="step-number">4</span>
+            <p>ช่างเข้าหน้างานตามเวลานัด</p>
+        </div>
+        <div className="step-item">
+            <span className="step-number">5</span>
+            <p>ตรวจสอบและชำระเงิน</p>
+        </div>
+    </div>
+</section>
             {/* Map Section */}
             <section className="map-section">
                 <h3>ตำแหน่ง</h3>

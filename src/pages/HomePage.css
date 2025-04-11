@@ -1,3 +1,9 @@
+
+
+.category-button, .add-to-cart-button {
+    margin-top: 10px;
+}
+
 .add-to-cart-button {
   background-color: #10b981;
   color: white;
@@ -14,33 +20,82 @@
 }
 
 .cart-confirmation {
-  background-color: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-}
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    font-family: 'Prompt', sans-serif;
+  }
+  
+  .confirmation-box {
+    background-color: #ffffff;
+    padding: 2rem 2.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    color: #333;
+    text-align: center;
+    max-width: 420px;
+    width: 90%;
+    animation: fadeInScale 0.3s ease;
+    border: 1px solid #eee;
+  }
+  
+  .confirmation-box p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .btn.yes {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .btn.yes:hover {
+    background-color: #218838;
+  }
+  
+  .btn.no {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .btn.no:hover {
+    background-color: #c82333;
+  }
+  
+  @keyframes fadeInScale {
+    from {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
 
-.cart-confirmation button {
-  margin: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  background-color: #3b82f6;
-  border: none;
-  color: white;
-}
-
-.cart-confirmation button:hover {
-  background-color: #2563eb;
-}
-
-/* ส่วนของ popular-item */
 .popular-item,
 .category-item {
     background-color: #ffffff;
@@ -48,7 +103,7 @@
     border-radius: 12px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 220px; /* ขนาดการ์ดให้เท่ากัน */
+    width: 220px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     margin: 0 10px;
 }
@@ -59,7 +114,6 @@
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 
-/* การตั้งค่าสำหรับรูปภาพในการ์ด */
 .img-box {
     height: 120px;
     margin-bottom: 12px;
@@ -76,7 +130,7 @@
     border-radius: 8px;
 }
 
-/* ปรับให้ข้อความและปุ่มมีลักษณะเดียวกัน */
+
 .popular-item p,
 .category-item p {
     margin-top: 10px;
@@ -85,7 +139,6 @@
     color: #333;
 }
 
-/* ปุ่มในการ์ด */
 .popular-button,
 .category-button,
 .add-to-cart-button {
@@ -93,21 +146,22 @@
     padding: 8px 16px;
     font-size: 14px;
     border-radius: 8px;
-    background-color: #003366;
+    background-color: #660000;
     color: white;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: 100%; /* ให้ปุ่มมีความกว้างเต็มการ์ด */
+    width: 100%;
 }
-
+.p1{
+    color: #ffffff;
+}
 .popular-button:hover,
 .category-button:hover,
 .add-to-cart-button:hover {
     background-color: #2563eb;
 }
 
-/* ส่วนของ scroll สำหรับ popular และ category */
 .popular-scroll,
 .category-scroll {
     display: flex;
@@ -127,8 +181,14 @@
     background-color: #ffffff;
 }
 
+h3 {
+    font-size: 30px;
+    margin-bottom: 16px;
+    color: #111827;
+}
+
 .category-section h3 {
-    font-size: 22px;
+    font-size: 30px;
     margin-bottom: 16px;
     color: #111827;
 }
@@ -336,12 +396,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
 }
 
 .menu-button:hover {
     background: #dfe6ff;
     color: #00003c;
-    transform: scale(1.1);
+    transform: scale(1.05); 
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
 .menu-button.active {
@@ -362,17 +424,7 @@
     background-color: #ffffff;
 }
 
-.popular-scroll {
-    display: flex;
-    overflow-x: auto;
-    gap: 16px;
-    padding-top: 12px;
-    scrollbar-width: none;
-}
 
-.popular-scroll::-webkit-scrollbar {
-    display: none;
-}
 
 .popular-item {
     min-width: 120px;
@@ -490,30 +542,166 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Media query สำหรับ Desktop */
-@media (min-width: 1024px) {
-    .main-menu {
-        flex-wrap: nowrap;
-    }
-
-    .menu-button {
-        flex: 1 1 22%;
-        padding: 20px 0;
-    }
-
-    .popular-scroll {
-        gap: 32px;
-    }
-
-    .steps-boxes {
-        flex-wrap: nowrap;
-    }
-
-    .step-box {
-        width: 22%;
-    }
-
-    .category-icons {
-        grid-template-columns: repeat(6, 1fr);
-    }
+.popular-section {
+    position: relative;
 }
+
+.scroll-buttons {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.scroll-arrow {
+    background: rgba(255, 255, 255, 0.7);
+    border: none;
+    pointer-events: all;
+    cursor: pointer;
+}
+
+.popular-scroll {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 1rem;
+    padding: 1rem 0;
+}
+.service-steps-section {
+    padding: 30px 20px;
+    background-color: #f1f6fb;
+    margin: 30px auto;
+    border-radius: 12px;
+    max-width: 1000px;
+    text-align: center;
+}
+
+.service-steps-section h3 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.steps-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.step-item {
+    width: 160px;
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.step-number {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 50%;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+/* style.css */
+
+.product-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* จัดชิดซ้าย */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    width: 300px; /* กำหนดความกว้างตามต้องการ */
+    font-family: sans-serif; /* กำหนดฟอนต์เริ่มต้น */
+  }
+  
+  .product-image-container {
+    width: 100%;
+    margin-bottom: 15px;
+    text-align: center; /* จัดรูปภาพตรงกลาง */
+  }
+  
+  .product-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  
+  .new-badge {
+    background-color: #ff9800; /* สีส้ม */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    margin-bottom: 10px;
+  }
+  
+  .product-details {
+    margin-bottom: 15px;
+  }
+  
+  .product-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .product-description {
+    color: #555;
+    font-size: 0.9em;
+    margin-bottom: 8px;
+  }
+  
+  .product-code {
+    color: #777;
+    font-size: 0.8em;
+    margin-bottom: 10px;
+  }
+  
+  .product-actions {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .action-icon {
+    margin-right: 10px;
+    color: #888;
+    font-size: 1.1em;
+    cursor: pointer;
+  }
+  
+  .price-section {
+    display: flex;
+    align-items: flex-end; /* จัดให้ราคาและต่อหน่วยอยู่บรรทัดเดียวกัน */
+  }
+  
+  .old-price {
+    color: #999;
+    font-size: 0.9em;
+    text-decoration: line-through;
+    margin-right: 10px;
+  }
+  
+  .current-price {
+    color: #f44336; /* สีแดง */
+    font-size: 2em; /* ปรับขนาดให้ใหญ่ขึ้นตามภาพ */
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  
+  .price-unit {
+    color: #555;
+    font-size: 0.8em;
+  }

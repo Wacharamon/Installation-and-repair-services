@@ -1,35 +1,256 @@
-/* รีเซ็ตเบื้องต้น */
+/* ตั้งค่ารีเซ็ตเบื้องต้น */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Prompt', sans-serif;
-}
-
+  }
+  
+  /* Fonts & Colors */
+  :root {
+    --primary-color: #003366;
+    --accent-color: #ffcc00;
+    --light-bg: #ffffff;
+    --dark-text: #333333;
+    --body-bg: #f4f4f4;
+    --font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+  
+  body {
+    background-color: var(--body-bg);
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: var(--font-family);
+  }
+  
+  /* Container หลักของ Navbar */
+  .navbar-container {
+    width: 100%;
+    background-color: var(--light-bg);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  /* Layout หลักของ Navbar */
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--primary-color);
+    padding: 16px 20px;
+    position: relative;
+  }
+  
+  /* ส่วนซ้าย: โลโก้และ hamburger menu */
+  .navbar-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .hamburger-menu {
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: var(--light-bg);
+    cursor: pointer;
+    margin-right: 16px;
+    transition: color 0.3s ease;
+  }
+  
+  .hamburger-menu:hover {
+    color: var(--accent-color);
+  }
+  
+  .logo img {
+    height: 45px;
+    object-fit: contain;
+  }
+  
+  /* ส่วนกลาง: ช่องค้นหา */
+  .navbar-center {
+    flex: 1;
+    margin: 0 20px;
+  }
+  
+  .search-box {
+    display: flex;
+    align-items: center;
+    background-color: var(--primary-color);
+    border-radius: 30px;
+    overflow: hidden;
+    height: 40px;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+  }
+  
+  .search-box input {
+    flex: 1;
+    padding: 10px 16px;
+    border: none;
+    background-color: var(--light-bg);
+    font-size: 16px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    height: 100%; 
+    outline: none;
+  }
+  
+  .search-box button {
+    flex: 0 0 auto;
+    padding: 0 16px;
+    background-color: #9f9f9f;
+    border: none;
+    color: var(--light-bg);
+    font-size: 16px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .search-box button:hover {
+    background-color: var(--accent-color);
+  }
+  
+  /* เมนูสำหรับมือถือ */
+  .navbar-menu {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: var(--light-bg);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    z-index: 100;
+  }
+  
+  .navbar-menu ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .navbar-menu ul li {
+    border-bottom: 1px solid #eee;
+  }
+  
+  .navbar-menu ul li a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: var(--dark-text);
+    transition: background-color 0.3s ease;
+  }
+  
+  .navbar-menu ul li a:hover {
+    background-color: #f0f0f0;
+  }
+  
+  /* ส่วนขวา: รถเข็นและผู้ใช้ */
+  .navbar-right {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .cart-icon,
+  .user-icon {
+    text-decoration: none;
+    color: var(--light-bg);
+    font-size: 22px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .cart-icon:hover,
+  .user-icon:hover {
+    color: var(--accent-color);
+  }
+  
+  /* เมนูรอง (Secondary Menu) */
+  .secondary-menu {
+    display: flex;
+    justify-content: space-around;
+    padding: 16px 0;
+    background-color: var(--light-bg);
+    border-top: 2px solid #f1f1f1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .secondary-menu a {
+    text-decoration: none;
+    color: var(--dark-text);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    transition: color 0.3s ease;
+  }
+  
+  .secondary-menu a:hover {
+    color: var(--primary-color);
+  }
+  
+  /* Media Queries สำหรับหน้าจอที่กว้าง (Desktop) */
+  @media (min-width: 1024px) {
+    .navbar {
+      padding: 20px 32px;
+    }
+  
+    .search-box input {
+      font-size: 18px;
+    }
+  
+    .search-box button {
+      font-size: 18px;
+      padding: 0 20px;
+    }
+  
+    .secondary-menu a {
+      font-size: 16px;
+    }
+  }
+  
+  /* Large Desktop */
+  @media (min-width: 1200px) {
+    .navbar {
+      padding: 24px 48px;
+    }
+  
+    .search-box input {
+      font-size: 18px;
+    }
+  
+    .search-box button {
+      font-size: 20px;
+      padding: 0 24px;
+    }
+  
+    .secondary-menu a {
+      font-size: 16px;
+    }
+  }
+  
 body {
     background-color: #f4f4f4;
+    font-size: 16px;
+    line-height: 1.5;
 }
 
-/* Navbar container */
-.navbar-container {
-    width: 100%;
-    background-color: #ffffff;
-    font-family: 'Prompt', sans-serif;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
 
-/* Top navbar */
 .navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #003366; /* เปลี่ยนสีให้เข้มขึ้น */
-    padding: 12px 20px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* เพิ่มเงาเล็กน้อย */
-    
+    background-color: #003366;
+    padding: 16px 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-/* Left: Hamburger + Logo */
 .navbar-left {
     display: flex;
     align-items: center;
@@ -41,20 +262,19 @@ body {
     font-size: 28px;
     color: #ffffff;
     cursor: pointer;
-    margin-right: 15px;
+    margin-right: 16px;
     transition: color 0.3s ease;
 }
 
 .hamburger-menu:hover {
-    color: #ffcc00; /* เปลี่ยนสีเมื่อ hover */
+    color: #ffcc00;
 }
 
 .logo img {
-    height: 45px; /* ปรับขนาด logo */
+    height: 45px;
     object-fit: contain;
 }
 
-/* Center: Search box */
 .navbar-center {
     flex: 1;
     margin: 0 20px;
@@ -62,48 +282,66 @@ body {
 
 .search-box {
     display: flex;
-    background-color: #f1f1f1;
+    align-items: center;
+    background-color: #003366;
     border-radius: 30px;
     overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    height: 40px; /* กำหนดความสูงแน่นอน */
+    max-width: 600px; /* เพิ่มความยาว */
+    width: 100%;
+    margin: 0 auto; /* จัดให้อยู่ตรงกลาง */
 }
 
 .search-box input {
     flex: 1;
-    padding: 12px 18px;
+    padding: 10px 16px;
     border: none;
-    background: transparent;
-    outline: none;
+    background-color: #f1f1f1;
     font-size: 16px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    height: 100%; 
+    outline: none;
 }
 
 .search-box button {
-    background: transparent;
+    width: 40px;
+    height: 40px;
+    background-color: #9f9f9f;
     border: none;
-    padding: 0 15px;
-    cursor: pointer;
-    background-color: #003366;
     color: white;
-    border-radius: 30px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
+
 .search-box button:hover {
-    background-color: #ffcc00; /* เปลี่ยนสีปุ่มเมื่อ hover */
+    background-color: #ffcc00;
 }
 
-/* Right: Cart + User */
 .navbar-right {
     display: flex;
     gap: 20px;
 }
 
-.cart-icon,
+.cart-icon {
+    color: #ffffff;
+    font-size: 22px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
 .user-icon {
     color: #ffffff;
     font-size: 22px;
     cursor: pointer;
     transition: color 0.3s ease;
+    text-decoration: none; /* ป้องกันเส้นใต้ */
 }
 
 .cart-icon:hover,
@@ -111,15 +349,14 @@ body {
     color: #ffcc00;
 }
 
-/* Secondary menu */
+
 .secondary-menu {
     display: flex;
     justify-content: space-around;
-    padding: 15px 0;
+    padding: 16px 0;
     background-color: #ffffff;
     border-top: 2px solid #f1f1f1;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-
 }
 
 .secondary-menu a {
@@ -132,5 +369,36 @@ body {
 }
 
 .secondary-menu a:hover {
-    color: #003366; /* เปลี่ยนสีเมื่อลอยเหนือ */
+    color: #003366;
+}
+
+@media (min-width: 1024px) {
+    .navbar {
+        padding: 20px 32px;
+    }
+
+    .search-box button {
+        padding: 16px 32px;
+        font-size: 20px;
+    }
+
+    .secondary-menu a {
+        font-size: 16px;
+    }
+}
+
+/* Large Desktop */
+@media (min-width: 1200px) {
+    .navbar {
+        padding: 24px 48px;
+    }
+
+    .search-box button {
+        padding: 20px 40px;
+        font-size: 22px;
+    }
+
+    .secondary-menu a {
+        font-size: 16px;
+    }
 }
